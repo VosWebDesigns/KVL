@@ -18,7 +18,8 @@ export default function HeroScene() {
 
     // ---- Renderer / scene / camera ----
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050505, 0.045);
+    const fog = new THREE.FogExp2(0x050505, 0.045);
+    scene.fog = fog;
 
     const camera = new THREE.PerspectiveCamera(42, mount.clientWidth / mount.clientHeight, 0.1, 100);
     camera.position.set(0, 1.55, 7.2);
@@ -151,7 +152,7 @@ export default function HeroScene() {
       }
 
       // scroll-driven dolly handled by GSAP, but we also ease here for fog density
-      scene.fog!.density = 0.045 + scrollProgress * 0.03;
+      fog.density = 0.045 + scrollProgress * 0.03;
 
       renderer.render(scene, camera);
     }

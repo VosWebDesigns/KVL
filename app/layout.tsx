@@ -11,6 +11,7 @@ const oswald = Oswald({
   weight: ["400", "500", "600", "700"],
   variable: "--font-display",
   display: "swap",
+  fallback: ["Arial Narrow", "Impact", "sans-serif"],
 });
 
 const inter = Inter({
@@ -18,6 +19,7 @@ const inter = Inter({
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-body",
   display: "swap",
+  fallback: ["ui-sans-serif", "system-ui", "Helvetica Neue", "Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
