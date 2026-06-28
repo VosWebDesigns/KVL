@@ -2,13 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: dark; }
+:root {
+  color-scheme: dark;
+  --font-display: "Oswald", ui-sans-serif, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; overflow-x: hidden; background: #050505; color: #fff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-::selection { background: #e50914; color: #fff; }
+html { scroll-behavior: auto; } /* Lenis handles smooth scroll; native smooth would double up */
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #050505;
+  color: #fff;
+  font-family: var(--font-body);
+}
+::selection { background: #e5070f; color: #fff; }
+
+/* Respect reduced motion globally as a hard fallback */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 @layer components {
-  .section-label { @apply text-sm font-black uppercase tracking-[0.28em] text-kvl-red; }
-  .section-title { @apply mt-3 text-4xl font-black tracking-tight text-white sm:text-5xl; }
+  .section-label {
+    @apply font-display text-xs font-semibold uppercase tracking-widest2 text-kvl-red;
+  }
+  .section-title {
+    @apply mt-3 font-display text-4xl font-bold uppercase tracking-tightest text-white sm:text-5xl;
+  }
   .container-page { @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8; }
+
+  /* Glassmorphism panel: frosted, layered, floating-grid OS feel */
+  .glass-panel {
+    @apply relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] backdrop-blur-2xl shadow-glass;
+  }
+  .glass-card {
+    @apply relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.015] backdrop-blur-xl shadow-glass transition duration-500 ease-cinematic;
+  }
+  .glass-nav {
+    @apply border-b border-white/10 bg-kvl-black/60 backdrop-blur-2xl;
+  }
+  .chrome-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-kvl-chrome to-transparent;
+  }
 }
